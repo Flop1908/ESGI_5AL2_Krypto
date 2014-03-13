@@ -10,25 +10,43 @@
 namespace CryptoCA {
     
     
-    public partial class _Default {
+    public partial class Subject {
         
         /// <summary>
-        /// Contrôle lbl_ca.
+        /// Contrôle lbl_nom.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ca;
+        protected global::System.Web.UI.WebControls.Label lbl_nom;
         
         /// <summary>
-        /// Contrôle tb_ca.
+        /// Contrôle tb_nom.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_ca;
+        protected global::System.Web.UI.WebControls.TextBox tb_nom;
+        
+        /// <summary>
+        /// Contrôle lbl_prenom.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_prenom;
+        
+        /// <summary>
+        /// Contrôle tb_prenom.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_prenom;
         
         /// <summary>
         /// Contrôle lbl_ville.

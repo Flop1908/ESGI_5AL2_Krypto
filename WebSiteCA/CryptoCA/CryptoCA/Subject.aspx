@@ -1,18 +1,19 @@
-﻿<%@ Page Title="Page d'accueil" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Default.aspx.cs" Inherits="CryptoCA._Default" %>
+﻿<%@ Page Title="Create Signed Certificate" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+    CodeBehind="Subject.aspx.cs" Inherits="CryptoCA.Subject" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h2>
-        Autorité de certification
+        Certificat signé
     </h2>
     
-
-    <asp:Label ID="lbl_ca" runat="server" Text="Nom CA: " Width="80px"></asp:Label>
-    <asp:TextBox ID="tb_ca" runat="server"></asp:TextBox>
+    <asp:Label ID="lbl_nom" runat="server" Text="Nom : " Width="80px"></asp:Label>
+    <asp:TextBox ID="tb_nom" runat="server"></asp:TextBox>
     <br />
-    
+    <asp:Label ID="lbl_prenom" runat="server" Text="Prénom: " Width="80px"></asp:Label>
+    <asp:TextBox ID="tb_prenom" runat="server"></asp:TextBox>
+    <br />
     <asp:Label ID="lbl_ville" runat="server" Text="Ville" Width="80px"></asp:Label>
     <asp:TextBox ID="tb_ville" runat="server"></asp:TextBox>
     <br />

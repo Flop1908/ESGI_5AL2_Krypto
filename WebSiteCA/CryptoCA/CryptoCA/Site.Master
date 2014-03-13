@@ -6,6 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -15,25 +18,17 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    Mon application ASP.NET
+                    Crypto
                 </h1>
             </div>
             <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                    <AnonymousTemplate>
-                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Se connecter</a> ]
-                    </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        Bienvenue <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Se déconnecter" LogoutPageUrl="~/"/> ]
-                    </LoggedInTemplate>
-                </asp:LoginView>
+
             </div>
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Accueil"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="À propos de"/>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Autorité de certification"/>
+                        <asp:MenuItem NavigateUrl="~/Subject.aspx" Text="Certification signé"/>
                     </Items>
                 </asp:Menu>
             </div>

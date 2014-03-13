@@ -7,31 +7,24 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CryptoCA.Core;
-using CryptoCA.Core.Annotations;
-using OpenSSL.Core;
-using OpenSSL.Crypto;
-using OpenSSL.X509;
 
 namespace CryptoCA
 {
-    
-    public partial class _Default : System.Web.UI.Page
+    public partial class Subject : System.Web.UI.Page
     {
-        public static X509CertificateAuthority CertifAuthority;
         public static string tmppath = Path.GetTempPath();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             GetDDLCountry();
-            
         }
 
         protected void btn_valider_Click(object sender, EventArgs e)
         {
             var ca = new CertificationAutority();
-            CertifAuthority = ca.GenerateCACertificateV2(tb_ca.Text, tb_ville.Text, ddl_pays.SelectedValue, tb_entreprise.Text, tb_service.Text);
+            var common = tb_nom.Text + "_" + tb_prenom.Text;
+            ca.GenerateSignedCertificate("DER", _Default.CertifAuthority, common, tb_ville.Text, ddl_pays.SelectedValue, tb_entreprise.Text, tb_service.Text);
 
-            string filename = tmppath + "CA-Certificate.cer";
+            string filename = tmppath + common + "-cert.cer";
             System.IO.FileInfo fileInfo = new System.IO.FileInfo(filename);
             Response.Clear();
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileInfo.Name);

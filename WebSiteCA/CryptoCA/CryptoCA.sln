@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoCA", "CryptoCA\CryptoCA.csproj", "{714A8040-E9B6-4CA5-AD3F-955F85E18BEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoCA.Core", "CryptoCA.Core\CryptoCA.Core.csproj", "{209E6B8C-5A1F-4AAF-A1CE-5AFD0DA46BBF}"

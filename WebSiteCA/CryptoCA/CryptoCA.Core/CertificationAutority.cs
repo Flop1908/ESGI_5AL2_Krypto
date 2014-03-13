@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using CryptoCA.Core.Annotations;
 using OpenSSL.Core;
 using OpenSSL.Crypto;
@@ -13,7 +14,7 @@ namespace CryptoCA.Core
     public class CertificationAutority
     {
         //Chemin d'enregistrement des fichiers
-        private const string PATH = @"S:\Data\NDG_A_RECUPERER\WebSiteCA\";
+        private string PATH = Path.GetTempPath();
         //Mot de passe des certificats
         private const string MDP = "BADASSdu94";
         public X509CertificateAuthority MetaCertificateAuthority { get; private set; }
@@ -46,12 +47,12 @@ namespace CryptoCA.Core
         /// <summary>
         /// Creation du certificat de l'autorité de certification
         /// </summary>
-        public void GenerateCACertificateV2()
+        public X509CertificateAuthority GenerateCACertificateV2(string common, string ville, string pays, string entreprise, string service)
         {
             //Fabrication de la clé privée en RSA
             var cryptoKey = CreateNewRSAKey(2048);
             //Les infos sur la CA
-            var subject = GetCertificateAuthoritySubject();
+            var subject = GetCertificateAuthoritySubject(common, ville, pays, entreprise, service);
             //Options supplémentaires
             var extensions = GetCertificateAuthorityExtensions();
             //Création du certificat auto-signé représentant la CA
@@ -62,7 +63,7 @@ namespace CryptoCA.Core
             MetaCertificateAuthority = ca;
 
             //Enregistrement du certificat dans un fichier
-            using (var bio = BIO.File(PATH + "CA Certificate.cer", "w"))
+            using (var bio = BIO.File(PATH + "CA-Certificate.cer", "w"))
             {
                 ca.Certificate.Write(bio);
             }
@@ -78,6 +79,8 @@ namespace CryptoCA.Core
             {
                 ca.Certificate.PublicKey.WritePrivateKey(bio, Cipher.DES_EDE3_CBC, MDP);
             }
+
+            return ca;
         }
 
         /// <summary>
@@ -100,16 +103,16 @@ namespace CryptoCA.Core
         /// Informations concernant l'autorité de certification (faudra les récupérer du site web)
         /// </summary>
         /// <returns></returns>
-        public X509Name GetCertificateAuthoritySubject()
+        public X509Name GetCertificateAuthoritySubject(string common, string ville, string pays, string entreprise, string service)
         {
             //Un peu plus d'infos que le minimum syndical
             var subject = new X509Name
             {
-                Common = "Flop Self Signing Certificate",
-                Country = "FR",
-                StateOrProvince = "WeshCountry",
-                Organization = "FlopCorporation",
-                OrganizationUnit = "BatmanR&D"
+                Common = common + " Self Signing Certificate",
+                Country = pays,
+                StateOrProvince = ville,
+                Organization = entreprise,
+                OrganizationUnit = service
             };
 
             return subject;
@@ -125,7 +128,7 @@ namespace CryptoCA.Core
             using (var rsa = new RSA())
             {
                 //Doit etre un nombre premier
-                BigNumber exponent = 0x10001; 
+                BigNumber exponent = 0x10001;
                 rsa.GenerateKeys(numberOfBits, exponent, null, null);
 
                 return new CryptoKey(rsa);
@@ -140,42 +143,43 @@ namespace CryptoCA.Core
         /// Fonction qui va créer la requete de certification et signer le certificat
         /// </summary>
         /// <param name="version"></param>
-        public void GenerateSignedCertificate(string version)
+        public void GenerateSignedCertificate(string version, X509CertificateAuthority ca, string common, string ville, string pays, string entreprise, string service)
         {
             //création de la requete
-            var x509Request = CreateCertificateSigningRequest();
+            var x509Request = CreateCertificateSigningRequest(common, ville, pays, entreprise, service);
 
             //la suite ne se fait que si on a une autorité de certification
-            if (MetaCertificateAuthority != null)
+            if (ca != null)
             {
+                
                 //Signature de la reqeuete pour un an
-                var signedCert = MetaCertificateAuthority.ProcessRequest(x509Request, DateTime.UtcNow,
+                var signedCert = ca.ProcessRequest(x509Request, DateTime.UtcNow,
                     DateTime.UtcNow.AddYears(1), MessageDigest.SHA512);
                 //Plusieurs versions d'enregistrement possibles
                 switch (version.ToUpper().Trim())
                 {
                     case "DER":
-                        using (var bio = BIO.File(PATH + signedCert.Subject.Common + "-cert.cer", "w"))
+                        using (var bio = BIO.File(PATH + common + "-cert.cer", "w"))
                         {
                             signedCert.Write_DER(bio);
                         }
                         break;
 
                     case "PEM":
-                        using (var bio = BIO.File(PATH + signedCert.Subject.Common + "-cert.cer", "w"))
+                        using (var bio = BIO.File(PATH + common + "-cert.cer", "w"))
                         {
                             signedCert.Write(bio);
                         }
                         break;
 
-                    case "PKCS":
-                        using (var bio = BIO.File(PATH + signedCert.Subject.Common + "-cert.cer", "w"))
+                    /*case "PKCS":
+                        using (var bio = BIO.File(PATH + signedCert.Subject.Common + "-cert.pfx", "w"))
                         using (var caStack = new Stack<X509Certificate>())
                         using (var pfx = new PKCS12(MDP, signedCert.PrivateKey, signedCert, caStack))
                         {
                             pfx.Write(bio);
                         }
-                        break;
+                        break;*/
                     default:
                         Console.WriteLine("BAD PARAMETER");
                         break;
@@ -191,15 +195,15 @@ namespace CryptoCA.Core
         /// Fonction de création de CSR
         /// </summary>
         /// <returns></returns>
-        public X509Request CreateCertificateSigningRequest()
+        public X509Request CreateCertificateSigningRequest(string common, string ville, string pays, string entreprise, string service)
         {
             //Ajout des info complémentaires
-            using (var requestDetails = GetCertificateSigningRequestSubject())
+            using (var requestDetails = GetCertificateSigningRequestSubject(common, ville, pays, entreprise, service))
             //Création de sa clé et de la requete
             using (var key = CreateNewRSAKey(4096))
             {
                 // Version 2 = X.509 Version 3
-                int version = 2; 
+                int version = 2;
                 return new X509Request(version, requestDetails, key);
             }
         }
@@ -208,15 +212,15 @@ namespace CryptoCA.Core
         /// Fonction d'ajout des infos du CSR (faudra les récupérer du site web)
         /// </summary>
         /// <returns></returns>
-        public X509Name GetCertificateSigningRequestSubject()
+        public X509Name GetCertificateSigningRequestSubject(string common, string ville, string pays, string entreprise, string service)
         {
             var requestDetails = new X509Name();
 
-            requestDetails.Common = "Cahir Mawr Dyffryn aep Ceallach";
-            requestDetails.Country = "FR";
-            requestDetails.StateOrProvince = "WeshCountry";
-            requestDetails.Organization = "FlopCorporation";
-            requestDetails.OrganizationUnit = "BatmanR&D";
+            requestDetails.Common = common;
+            requestDetails.Country = pays;
+            requestDetails.StateOrProvince = ville;
+            requestDetails.Organization = entreprise;
+            requestDetails.OrganizationUnit = service;
 
             return requestDetails;
         }
