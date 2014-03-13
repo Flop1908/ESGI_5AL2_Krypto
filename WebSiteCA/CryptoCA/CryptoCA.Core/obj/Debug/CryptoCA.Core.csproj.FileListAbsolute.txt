@@ -1,0 +1,4 @@
+C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA.Core\bin\Debug\CryptoCA.Core.dll
+C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA.Core\bin\Debug\CryptoCA.Core.pdb
+C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA.Core\obj\Debug\CryptoCA.Core.dll
+C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA.Core\obj\Debug\CryptoCA.Core.pdb
