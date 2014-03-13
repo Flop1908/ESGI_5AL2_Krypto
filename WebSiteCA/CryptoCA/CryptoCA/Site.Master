@@ -29,6 +29,7 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Autorité de certification"/>
                         <asp:MenuItem NavigateUrl="~/Subject.aspx" Text="Certification signé"/>
+                        <asp:MenuItem NavigateUrl="~/Revocation.aspx" Text="Révocation"/>
                     </Items>
                 </asp:Menu>
             </div>

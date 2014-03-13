@@ -45,7 +45,7 @@
   <ItemGroup>
     <Reference Include="ManagedOpenSsl, Version=0.6.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CryptoCA.Core\bin\Debug\ManagedOpenSsl.dll</HintPath>
+      <HintPath>G:\ManagedOpenSsl.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -65,6 +65,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Revocation.aspx" />
     <Content Include="Subject.aspx" />
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
@@ -85,6 +86,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Revocation.aspx.cs">
+      <DependentUpon>Revocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Revocation.aspx.designer.cs">
+      <DependentUpon>Revocation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Subject.aspx.cs">
       <DependentUpon>Subject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

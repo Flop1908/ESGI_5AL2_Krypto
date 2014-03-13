@@ -6,3 +6,11 @@ C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA\bin\M
 C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA\bin\CryptoCA.Core.pdb
 C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA\obj\Debug\CryptoCA.dll
 C:\Users\Kirua\Desktop\ESGI_5AL2_Krypto-master\WebSiteCA\CryptoCA\CryptoCA\obj\Debug\CryptoCA.pdb
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\obj\Debug\CryptoCA.csprojResolveAssemblyReference.cache
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\bin\CryptoCA.dll
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\bin\CryptoCA.pdb
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\bin\CryptoCA.Core.dll
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\bin\ManagedOpenSsl.dll
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\bin\CryptoCA.Core.pdb
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\obj\Debug\CryptoCA.dll
+C:\Users\Ricky\Documents\GitHub\ESGI_5AL2_Krypto\WebSiteCA\CryptoCA\CryptoCA\obj\Debug\CryptoCA.pdb
